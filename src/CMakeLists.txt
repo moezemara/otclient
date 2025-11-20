@@ -120,12 +120,24 @@ find_package(OpenSSL QUIET)
 find_package(PhysFS REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(phmap REQUIRED)
-find_package(absl CONFIG REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(LibLZMA REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(asio REQUIRED)
-find_package(Threads REQUIRED)
+if(WASM)
+  set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
+  set(THREADS_PREFER_PTHREAD_FLAG TRUE)
+  find_package(Threads)
+  if(NOT Threads_FOUND)
+    add_library(Threads::Threads INTERFACE IMPORTED)
+    target_compile_options(Threads::Threads INTERFACE -pthread)
+    target_link_options(Threads::Threads INTERFACE -pthread)
+    set(CMAKE_THREAD_LIBS_INIT "-pthread")
+    set(Threads_FOUND TRUE)
+  endif()
+else()
+  find_package(Threads REQUIRED)
+endif()
 find_package(STDUUID CONFIG REQUIRED)
 find_package(pugixml CONFIG REQUIRED)
 find_package(ZLIB REQUIRED)
@@ -549,7 +561,6 @@ if(MSVC)
           ${STDUUID}
 
           protobuf::libprotobuf protobuf
-          absl::log_internal_check_op
           Threads::Threads
           GLEW::GLEW
           asio::asio
@@ -596,7 +607,6 @@ elseif(ANDROID)
           ${MINIZIP_LIBRARY}
 
           protobuf::libprotobuf protobuf
-          absl::log_internal_check_op
           Threads::Threads
           asio::asio
           OpenSLES
@@ -661,7 +671,6 @@ elseif(WASM)
           ${HTTPLIB_LIBRARY}
 
           protobuf::libprotobuf protobuf
-          absl::log_internal_check_op
 
           Threads::Threads
           asio::asio
@@ -778,7 +787,6 @@ else() # Linux
           ${HTTPLIB_LIBRARY}
 
           protobuf::libprotobuf protobuf
-          absl::log_internal_check_op
           Threads::Threads
           X11::X11
           asio::asio
