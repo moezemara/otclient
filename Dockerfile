@@ -20,7 +20,7 @@ RUN vcpkgCommitId=$(grep '.builtin-baseline' vcpkg.json | awk -F: '{print $2}' |
 
 WORKDIR /opt/vcpkg
 COPY vcpkg.json /opt/vcpkg/
-RUN /opt/vcpkg/vcpkg --feature-flags=binarycaching,manifests,versions install
+RUN /opt/vcpkg/vcpkg install --triplet=x64-linux
 
 COPY ./ /otclient/
 WORKDIR /otclient/build
