@@ -8,6 +8,9 @@ on:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
 
+# Note: Lukka actions must use hardcoded commit SHAs in the 'uses:' field
+# because GitHub Actions requires literal strings for action resolution at parse time.
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,12 +23,12 @@ jobs:
           fetch-depth: 0
 
       - name: Setup vcpkg with baseline
-        uses: lukka/run-vcpkg@a400452f634fe49e9f18d388aeb1809dcc642136 # v11 (full commit SHA)
+        uses: lukka/run-vcpkg@b3dd708d38df5c856fe1c18dc0d59ab771f93921
         with:
           vcpkgGitCommitId: 8d73531d42c57b8e9f02f4db3f671ca3696eaf7b
 
       - name: Setup CMake
-        uses: lukka/get-cmake@v3.27.0@e00a2d0fc1a9f39f0f18a8082a32db8f9a2baf7c
+        uses: lukka/get-cmake@e00a2d0fc1a9f39f0f18a8082a32db8f9a2baf7c
 
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y build-essential ninja-build
@@ -44,7 +47,7 @@ jobs:
 
       - name: SonarCloud Scan
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
-        uses: SonarSource/sonarcloud-github-action@v2@4b4d7634dab97dcee0b75763a54a6dc92a9e6bc1
+        uses: SonarSource/sonarcloud-github-action@4b4d7634dab97dcee0b75763a54a6dc92a9e6bc1
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
