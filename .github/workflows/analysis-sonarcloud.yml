@@ -57,7 +57,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential ninja-build gcc g++
+          sudo apt-get install -y build-essential ninja-build gcc g++ libx11-dev libglew-dev
 
       - name: Cache vcpkg binary artifacts
         uses: actions/cache@v4
