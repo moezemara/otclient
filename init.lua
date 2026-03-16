@@ -60,10 +60,10 @@ if ENABLE_SERVERS then
         -- @field httpLogin Enables HTTP-based login on the server
         -- @field useAuthenticator Enables additional authentication layer
         --
-        ["127.0.0.1"] = {
-            port = 7171,
-            protocol = 1500,
-            httpLogin = false,
+        ["http://127.0.0.1/login.php"] = {
+            port = 80,
+            protocol = 1412,
+            httpLogin = true,
             useAuthenticator = false
         },
 

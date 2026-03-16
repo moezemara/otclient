@@ -145,7 +145,7 @@ local function onUpdateNeeded(protocol, signature)
 end
 
 local function updateLabelText()
-    if enterGame:getChildById('clientComboBox') and (tonumber(enterGame:getChildById('clientComboBox'):getText()) or 0) > 1080 then
+    if enterGame:getChildById('clientComboBox') and tonumber(enterGame:getChildById('clientComboBox'):getText()) > 1080 then
         enterGame:setText("Journey Onwards")
         enterGame:getChildById('emailLabel'):setText("Email:")
         enterGame:getChildById('rememberEmailBox'):setText("Remember Email:")
@@ -787,7 +787,7 @@ function EnterGame.doLogin()
     g_settings.set('port', G.port)
     g_settings.set('client-version', clientVersion)
 
-    if (clientVersion or 0) >= 1281 and G.port ~= 7171 then
+    if clientVersion >= 1281 and G.port ~= 7171 then
         EnterGame.tryHttpLogin(clientVersion, httpLogin)
     else
         protocolLogin = ProtocolLogin.create()
@@ -869,7 +869,7 @@ function EnterGame.setUniqueServer(host, port, protocol, windowWidth, windowHeig
     stayLoggedBox:setOn(false)
 
     local clientVersion = tonumber(protocol)
-    clientBox:setCurrentOption(tostring(clientVersion))
+    clientBox:setCurrentOption(clientVersion)
     clientBox:setVisible(false)
     clientBox:setHeight(0)
 
