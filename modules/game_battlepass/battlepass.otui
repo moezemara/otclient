@@ -1,0 +1,145 @@
+// War Pass — OTUI Styles (v2)
+// Drop PNGs in images/battlepass/ to enable 9-slice art.
+// Falls back to solid colours automatically when PNGs are absent.
+
+BPHeader < UIWidget
+  background-color: #0d1117
+  border-width-bottom: 1
+  border-color: #21262d
+
+BPFooter < UIWidget
+  background-color: #0d1117
+  border-width-top: 1
+  border-color: #21262d
+
+BPStatBox < UIWidget
+  background-color: #161b22
+  border-width: 1
+  border-color: #30363d
+
+BPStatLabel < UILabel
+  font: verdana-11px-antialised
+  color: #8b949e
+  text-align: left
+
+BPStatValue < UILabel
+  font: verdana-11px-antialised
+  color: #e6edf3
+  text-align: left
+
+BPXpBg < UIWidget
+  background-color: #21262d
+  border-width: 1
+  border-color: #30363d
+
+BPXpFill < UIWidget
+  background-color: #e94560
+
+BPXpGlow < UIWidget
+  background-color: #4a0f1e
+
+BPCard < UIWidget
+  background-color: #161b22
+  border-width: 1
+  border-color: #e94560
+  $hover:
+    background-color: #1c2130
+  $pressed:
+    background-color: #111722
+
+BPCardLocked < UIWidget
+  background-color: #0f1117
+  border-width: 1
+  border-color: #21262d
+  $hover:
+    background-color: #121620
+
+BPCardDone < UIWidget
+  background-color: #0d2010
+  border-width: 1
+  border-color: #2ea043
+  $hover:
+    background-color: #102514
+
+BPCardPrem < UIWidget
+  background-color: #1a1508
+  border-width: 2
+  border-color: #f0c040
+  $hover:
+    background-color: #201c0a
+
+BPMilestoneBorder < UIWidget
+  background-color: alpha
+  border-width: 2
+  border-color: #f0c040
+
+BPDivider < UIWidget
+  background-color: #21262d
+
+BPTierNum < UILabel
+  text-align: center
+  font: verdana-11px-antialised
+  color: #c9d1d9
+
+BPTierNumMilestone < UILabel
+  text-align: center
+  font: verdana-11px-antialised
+  color: #f0c040
+
+BPCardText < UILabel
+  text-align: left
+  font: verdana-11px-antialised
+
+BPBadge < UILabel
+  text-align: center
+  font: verdana-11px-antialised
+  color: #ffffff
+
+BPClaimBtn < UIWidget
+  text-align: center
+  font: verdana-11px-antialised
+  color: #ffffff
+  $hover:
+    opacity: 0.85
+  $pressed:
+    opacity: 0.65
+
+BPTitle < UILabel
+  text-align: left
+  font: verdana-11px-antialised
+  color: #e6edf3
+
+BPSeason < UILabel
+  text-align: left
+  font: verdana-11px-antialised
+  color: #8b949e
+
+BPInfo < UILabel
+  text-align: left
+  font: verdana-11px-antialised
+  color: #8b949e
+
+BPPremBadgePrem < UIWidget
+  background-color: #2a0f4a
+  border-width: 1
+  border-color: #9b59b6
+
+BPPremBadgeFree < UIWidget
+  background-color: #161b22
+  border-width: 1
+  border-color: #30363d
+
+BPCardNoPrem < UIWidget
+  background-color: #0e0c14
+  border-width: 1
+  border-color: #1e1a2e
+
+BPArrow < UILabel
+  text-align: center
+  font: verdana-11px-antialised
+  color: #3a3f48
+
+BPRowLabel < UILabel
+  text-align: center
+  font: verdana-11px-antialised
+  color: #8b949e

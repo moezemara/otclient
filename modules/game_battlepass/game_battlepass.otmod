@@ -1,0 +1,10 @@
+Module
+  name: game_battlepass
+  description: War Pass — seasonal battle pass UI
+  author: Server
+  autoload: true
+  autoload-priority: 900
+  sandboxed: true
+  scripts: [ battlepass.lua ]
+  @onLoad: init()
+  @onUnload: terminate()
