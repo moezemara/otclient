@@ -273,7 +273,7 @@ void Game::processTextMessage(const Otc::MessageMode mode, const std::string_vie
     g_lua.callGlobalField("g_game", "onTextMessage", mode, text);
 }
 
-void Game::processTalk(const std::string_view name, const uint16_t level, const Otc::MessageMode mode, const std::string_view text, const uint16_t channelId, const Position& pos)
+void Game::processTalk(const std::string_view name, const uint32_t level, const Otc::MessageMode mode, const std::string_view text, const uint16_t channelId, const Position& pos)
 {
     g_lua.callGlobalField("g_game", "onTalk", name, level, mode, text, channelId, pos);
 }
@@ -1930,7 +1930,7 @@ void Game::processHighscore(const std::string_view serverName, const std::string
                             const std::vector<std::tuple<uint32_t, std::string>>& vocations,
                             const std::vector<std::tuple<uint8_t, std::string>>& categories,
                             const uint16_t page, const uint16_t totalPages,
-                            const std::vector<std::tuple<uint32_t, std::string, std::string, uint8_t, std::string, uint16_t, uint8_t, uint64_t>>& highscores, const uint32_t entriesTs)
+                            const std::vector<std::tuple<uint32_t, std::string, std::string, uint8_t, std::string, uint32_t, uint8_t, uint64_t>>& highscores, const uint32_t entriesTs)
 {
     g_lua.callGlobalField("g_game", "onProcessHighscores", serverName, world, worldType, battlEye, vocations, categories, page, totalPages, highscores, entriesTs);
 }

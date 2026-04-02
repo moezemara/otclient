@@ -21,7 +21,13 @@ local function onDetach(effect, oldOwner)
 end
 
 local function onOutfitChange(creature, outfit, oldOutfit)
+    local creatureName = creature and creature:getName() or "unknown"
+    local newType = outfit and outfit.type or 0
+    local oldType = oldOutfit and oldOutfit.type or 0
+    g_logger.debug('[AttachedEffects] onOutfitChange: creature=' .. creatureName .. ' oldType=' .. tostring(oldType) .. ' newType=' .. tostring(newType))
     for _i, effect in pairs(creature:getAttachedEffects()) do
+        local effectId = effect:getId()
+        g_logger.debug('[AttachedEffects] onOutfitChange: processing effectId=' .. tostring(effectId) .. ' for creature=' .. creatureName)
         AttachedEffectManager.executeThingConfig(effect, ThingCategoryCreature, outfit.type)
     end
 end

@@ -215,9 +215,8 @@ function createHighscores(list)
         row.voc:setText(entry[4] == 0 and "None" or getVocation(entry[4]))
         row.world:setText(entry[5])
         row.level:setText(entry[6])
-        row.points:setText(comma_value(entry[8]))
         if playerName:lower() == entry[2]:lower() then
-            for _, widget in pairs({"rank", "name", "voc", "world", "level", "points"}) do
+            for _, widget in pairs({"rank", "name", "voc", "world", "level"}) do
                 row[widget]:setColor("#60f860")
             end
         end

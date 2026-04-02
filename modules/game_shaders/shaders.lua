@@ -84,6 +84,26 @@ local OUTFIT_SHADERS = { {
     name = 'Outfit - ForgeFailed',
     useFramebuffer = true,
     frag = 'shaders/fragment/forge_failed.frag'
+}, {
+    name = 'Outfit - Rank1',
+    useFramebuffer = true,
+    frag = 'shaders/fragment/rank1_outline.frag'
+}, {
+    name = 'Outfit - Rank2',
+    useFramebuffer = true,
+    frag = 'shaders/fragment/rank2_outline.frag'
+}, {
+    name = 'Outfit - Rank3',
+    useFramebuffer = true,
+    frag = 'shaders/fragment/rank3_outline.frag'
+}, {
+    name = 'Outfit - Rank4',
+    useFramebuffer = true,
+    frag = 'shaders/fragment/rank4_outline.frag'
+}, {
+    name = 'Outfit - Rank5',
+    useFramebuffer = true,
+    frag = 'shaders/fragment/rank5_outline.frag'
 }, }
 
 local MOUNT_SHADERS = { {

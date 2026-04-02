@@ -1,0 +1,333 @@
+/* Smart Chest — CSS (forge visual DNA) */
+
+/* ══ Window ══════════════════════════════════════════════════════════════════ */
+.sc-window {
+  width: 510px;
+  height: 450px;
+}
+
+/* ══ Tab Bar ══════════════════════════════════════════════════════════════════ */
+.sc-tab-bar {
+  display: flex;
+  width: 502px;
+  height: 26px;
+  margin-bottom: 4px;
+}
+
+.sc-tab {
+  height: 26px;
+  width: 120px;
+  --image-source: '/modules/game_forge/images/button';
+  --image-size: 107 21;
+  --image-border: 3;
+  color: #909090;
+  text-align: center;
+  align-items: center;
+  padding: 4px 8px !important;
+  margin-right: 4px;
+}
+
+.sc-tab:checked {
+  color: #c8a844;
+}
+
+.sc-tab:hover {
+  color: #c0c0c0;
+}
+
+/* ══ Content Panels ══════════════════════════════════════════════════════════ */
+.sc-panel {
+  width: 502px;
+  height: 370px;
+  background-color: #363636;
+  --border-width-top: 1;
+  --border-color-top: #000000;
+  --border-width-left: 1;
+  --border-color-left: #000000;
+  --border-width-bottom: 1;
+  --border-color-bottom: #747474;
+  --border-width-right: 1;
+  --border-color-right: #747474;
+  padding: 8px;
+}
+
+/* ══ Two-column layout ═══════════════════════════════════════════════════════ */
+.sc-two-col {
+  display: flex;
+  width: 486px;
+  height: 316px;
+}
+
+.sc-col {
+  width: 226px;
+  height: 316px;
+}
+
+.sc-col-narrow {
+  width: 155px;
+  height: 316px;
+}
+
+.sc-col-wide {
+  width: 307px;
+  height: 316px;
+}
+
+.sc-vdivider {
+  width: 1px;
+  height: 316px;
+  background-color: #525252;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+/* ══ Section headers ═════════════════════════════════════════════════════════ */
+.sc-section-hdr {
+  height: 16px;
+  color: #c8a844;
+  margin-bottom: 6px;
+}
+
+/* ══ Labels ══════════════════════════════════════════════════════════════════ */
+.sc-row-label {
+  height: 13px;
+  color: #c0c0c0;
+}
+
+.sc-info-label {
+  color: #a0a0a0;
+  height: 13px;
+}
+
+.sc-gold-label {
+  color: #c8a844;
+  height: 13px;
+}
+
+/* ══ Progress bars ═══════════════════════════════════════════════════════════ */
+.sc-bar-bg {
+  width: 190px;
+  height: 8px;
+  background-color: #1e1e1e;
+  --border-width: 1;
+  --border-color: #141414;
+  margin-top: 2px;
+  margin-bottom: 5px;
+  overflow: hidden;
+}
+
+.sc-bar-bg-wide {
+  width: 440px;
+  height: 8px;
+  background-color: #1e1e1e;
+  --border-width: 1;
+  --border-color: #141414;
+  overflow: hidden;
+}
+
+.sc-bar-gold {
+  height: 8px;
+  background-color: #c8a844;
+}
+
+.sc-bar-green {
+  height: 8px;
+  background-color: #4caf50;
+}
+
+/* ══ Shard info row ══════════════════════════════════════════════════════════ */
+.sc-shard-box {
+  height: 22px;
+  width: 486px;
+  background-color: #2a2a2a;
+  --border-width-top: 1;
+  --border-color-top: #000000;
+  --border-width-bottom: 1;
+  --border-color-bottom: #747474;
+  --border-width-left: 1;
+  --border-color-left: #000000;
+  --border-width-right: 1;
+  --border-color-right: #747474;
+  margin-top: 6px;
+  padding: 4px 6px;
+  align-items: center;
+}
+
+/* ══ Vertical-stack selection buttons (refine tier list) ═════════════════════ */
+.sc-sel-btn {
+  height: 22px;
+  width: 150px;
+  --image-source: '/modules/game_forge/images/button';
+  --image-size: 107 21;
+  --image-border: 3;
+  color: #909090;
+  text-align: center;
+  align-items: center;
+  padding: 3px 5px !important;
+  margin-bottom: 4px;
+}
+
+.sc-sel-btn:checked {
+  color: #dfdfdf;
+}
+
+.sc-sel-btn:hover {
+  color: #c0c0c0;
+}
+
+/* ══ Quality buttons (horizontal row) ════════════════════════════════════════ */
+.sc-qual-btn {
+  height: 22px;
+  width: 96px;
+  --image-source: '/modules/game_forge/images/button';
+  --image-size: 107 21;
+  --image-border: 3;
+  color: #909090;
+  text-align: center;
+  align-items: center;
+  padding: 3px 5px !important;
+  margin-right: 5px;
+}
+
+.sc-qual-btn:checked {
+  color: #dfdfdf;
+}
+
+.sc-qual-btn:hover {
+  color: #c0c0c0;
+}
+
+/* ══ Key / fuse / exchange tier buttons (horizontal row) ══════════════════════ */
+.sc-key-btn {
+  height: 22px;
+  --image-source: '/modules/game_forge/images/button';
+  --image-size: 107 21;
+  --image-border: 3;
+  color: #909090;
+  text-align: center;
+  align-items: center;
+  padding: 3px 6px !important;
+  margin-right: 5px;
+}
+
+.sc-key-btn:checked {
+  color: #dfdfdf;
+}
+
+.sc-key-btn:hover {
+  color: #c0c0c0;
+}
+
+/* ══ Horizontal button row ════════════════════════════════════════════════════ */
+.sc-btn-row {
+  display: flex;
+  height: 22px;
+  margin-bottom: 8px;
+}
+
+/* ══ Horizontal separator ═════════════════════════════════════════════════════ */
+.sc-hsep {
+  width: 100%;
+  height: 1px;
+  background-color: #525252;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* ══ Main action button (big forge button) ═══════════════════════════════════ */
+.sc-action-btn {
+  --image-source: '/modules/game_forge/images/bigger-button';
+  --image-size: 128 66;
+  --image-clip: 0 0 128 66;
+  --image-border: 3;
+  width: 128px;
+  height: 32px;
+  text-align: center;
+  align-items: center;
+  color: #c0c0c0;
+}
+
+.sc-action-btn:pressed {
+  --image-clip: 0 66 128 66;
+}
+
+.sc-action-btn:disabled {
+  opacity: 0.5;
+}
+
+/* ══ Small button ════════════════════════════════════════════════════════════ */
+.sc-sm-btn {
+  --image-source: '/modules/game_forge/images/button';
+  --image-size: 107 21;
+  --image-border: 3;
+  height: 22px;
+  width: 90px;
+  text-align: center;
+  align-items: center;
+  color: #c0c0c0;
+  padding: 3px 8px !important;
+}
+
+.sc-sm-btn:pressed {
+  color: #dfdfdf;
+}
+
+/* ══ Exchange progress box ═══════════════════════════════════════════════════ */
+.sc-ex-box {
+  width: 460px;
+  background-color: #2e2e2e;
+  --border-width-top: 1;
+  --border-color-top: #000000;
+  --border-width-bottom: 1;
+  --border-color-bottom: #747474;
+  --border-width-left: 1;
+  --border-color-left: #000000;
+  --border-width-right: 1;
+  --border-color-right: #747474;
+  padding: 6px;
+  margin-bottom: 4px;
+}
+
+/* ══ Claim row ════════════════════════════════════════════════════════════════ */
+.sc-claim-row {
+  display: flex;
+  height: 22px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+/* ══ Footer ══════════════════════════════════════════════════════════════════ */
+.sc-footer {
+  display: flex;
+  height: 22px;
+  width: 502px;
+  margin-top: 6px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sc-balance-bg {
+  --image-source: '/modules/game_forge/images/balanceBg';
+  --image-size: 130 20;
+  --image-border: 3;
+  width: 160px;
+  height: 20px;
+  align-items: center;
+  text-align: center;
+}
+
+.sc-close-btn {
+  --image-source: '/modules/game_forge/images/button';
+  --image-size: 107 21;
+  --image-border: 3;
+  width: 60px;
+  height: 21px;
+  color: #c0c0c0;
+  text-align: center;
+  align-items: center;
+  padding: 3px 10px !important;
+}
+
+.sc-close-btn:pressed {
+  color: #dfdfdf;
+}

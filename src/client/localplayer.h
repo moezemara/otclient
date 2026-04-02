@@ -43,7 +43,7 @@ public:
     void setFreeCapacity(uint32_t freeCapacity);
     void setTotalCapacity(uint32_t totalCapacity);
     void setExperience(uint64_t experience);
-    void setLevel(uint16_t level, uint8_t levelPercent);
+    void setLevel(uint32_t level, uint8_t levelPercent);
     void setMana(uint32_t mana, uint32_t maxMana);
     void setManaShield(uint32_t manaShield, uint32_t maxManaShield);
     void setMagicLevel(uint16_t magicLevel, uint16_t magicLevelPercent);
@@ -83,7 +83,7 @@ public:
     uint8_t getLevelPercent() { return m_levelPercent; }
     uint8_t getHarmony() { return m_harmony; }
 
-    uint16_t getLevel() { return m_level; }
+    uint32_t getLevel() { return m_level; }
     uint16_t getSkillLevel(const Otc::Skill skill) { return m_skills[skill].level; }
     uint16_t getSkillBaseLevel(const Otc::Skill skill) { return m_skills[skill].baseLevel; }
     uint16_t getSkillLevelPercent(const Otc::Skill skill) { return m_skills[skill].levelPercent; }
@@ -206,7 +206,7 @@ private:
     uint32_t m_health{ 0 };
     uint32_t m_maxHealth{ 0 };
     uint64_t m_experience{ 0 };
-    uint16_t m_level{ 0 };
+    uint32_t m_level{ 0 };
     uint8_t m_levelPercent{ 0 };
     uint32_t m_mana{ 0 };
     uint32_t m_maxMana{ 0 };

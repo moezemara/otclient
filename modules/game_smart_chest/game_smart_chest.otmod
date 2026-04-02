@@ -1,0 +1,11 @@
+Module
+  name: game_smart_chest
+  description: Smart Chest System window — Overview, Refine, Craft & Fuse, Exchange
+  author: custom
+  website:
+  sandboxed: true
+  autoload: true
+  autoload-priority: 900
+  scripts: [ game_smart_chest ]
+  @onLoad: SmartChestController:init()
+  @onUnload: SmartChestController:terminate()

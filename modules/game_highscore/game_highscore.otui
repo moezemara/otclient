@@ -80,22 +80,11 @@ HighScoreData < UIWidget
   Label
     anchors.top: parent.top
     anchors.left: prev.right
-    anchors.bottom : parent.bottom
-    id: level
-    width: 65
-    !text: tr('-')
-    text-align: center
-    color: #dfdfdfcf
-    phantom: true
-
-  Label
-    anchors.top: parent.top
-    anchors.left: prev.right
     anchors.right: parent.right
     anchors.bottom : parent.bottom
-    text-align: right
-    margin-right: 5
-    id: points
+    id: level
+    !text: tr('-')
+    text-align: center
     color: #dfdfdfcf
     phantom: true
 
@@ -292,27 +281,11 @@ MainWindow
   PlayersTableHeaderColumn
     anchors.top: data.top
     anchors.left: prev.right
-    !text: tr('Level')  
-    size: 66 20
+    anchors.right: data.right
+    !text: tr('Level')
+    height: 20
     font: verdana-11px-antialised
     color: #dfdfdf88
-
-  PlayersTableHeaderColumn
-    id: points
-    anchors.top: data.top
-    anchors.left: prev.right
-    anchors.right: data.right
-    height: 20
-
-    Label
-      id: value
-      anchors.top: parent.top
-      anchors.right: parent.right
-      font: verdana-11px-antialised
-      color: #dfdfdf88
-      !text: tr('Points')  
-      margin-right: 6
-      text-offset: 0 3
 
   Label
     id: page

@@ -186,6 +186,10 @@ AttachedEffectManager = {
                 end
             end
         end
+        if not __EFFECTS[id] then
+            g_logger.error('[AttachedEffects] getConfig: effect id ' .. tostring(id) .. ' is not registered in Lua __EFFECTS (category=' .. tostring(category) .. ', thingId=' .. tostring(thingId) .. ')')
+            return nil
+        end
         return __EFFECTS[id].config
     end,
     executeThingConfig = function(effect, category, thingId)

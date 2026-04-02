@@ -67,7 +67,7 @@ protected:
 
     // message related
     static void processTextMessage(Otc::MessageMode mode, std::string_view text);
-    static void processTalk(std::string_view name, uint16_t level, Otc::MessageMode mode, std::string_view text, uint16_t channelId, const Position& pos);
+    static void processTalk(std::string_view name, uint32_t level, Otc::MessageMode mode, std::string_view text, uint16_t channelId, const Position& pos);
 
     // container related
     void processOpenContainer(uint8_t containerId, const ItemPtr& containerItem, std::string_view name, uint8_t capacity, bool hasParent, const std::vector<ItemPtr>& items, bool isUnlocked, bool hasPages, uint16_t containerSize, uint16_t firstIndex);
@@ -422,7 +422,7 @@ public:
                           const std::vector<std::tuple<uint32_t, std::string>>& vocations,
                           const std::vector<std::tuple<uint8_t, std::string>>& categories,
                           uint16_t page, uint16_t totalPages,
-                          const std::vector<std::tuple<uint32_t, std::string, std::string, uint8_t, std::string, uint16_t, uint8_t, uint64_t>>& highscores, uint32_t entriesTs);
+                          const std::vector<std::tuple<uint32_t, std::string, std::string, uint8_t, std::string, uint32_t, uint8_t, uint64_t>>& highscores, uint32_t entriesTs);
 
     void requestBless();
 

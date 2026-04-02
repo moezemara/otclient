@@ -354,12 +354,12 @@ void LocalPlayer::setExperience(const uint64_t experience)
     callLuaField("onExperienceChange", experience, oldExperience);
 }
 
-void LocalPlayer::setLevel(const uint16_t level, const uint8_t levelPercent)
+void LocalPlayer::setLevel(const uint32_t level, const uint8_t levelPercent)
 {
     if (m_level == level && m_levelPercent == levelPercent)
         return;
 
-    const uint16_t oldLevel = m_level;
+    const uint32_t oldLevel = m_level;
     const uint8_t oldLevelPercent = m_levelPercent;
 
     m_level = level;

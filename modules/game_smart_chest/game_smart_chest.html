@@ -1,0 +1,157 @@
+<link href="game_smart_chest.css" />
+<html>
+  <div placement="center">
+    <window class="sc-window" title="Smart Chest" placement="center" onescape="self:hide()">
+
+      <!-- ── Tab Bar ──────────────────────────────────────────────────────── -->
+      <div class="sc-tab-bar">
+        <button class="sc-tab" *checked="self.currentTab == 'overview'"  onclick="self:setTab('overview')">Overview</button>
+        <button class="sc-tab" *checked="self.currentTab == 'refine'"    onclick="self:setTab('refine')">Refine</button>
+        <button class="sc-tab" *checked="self.currentTab == 'craft'"     onclick="self:setTab('craft')">Craft &amp; Fuse</button>
+        <button class="sc-tab" *checked="self.currentTab == 'exchange'"  onclick="self:setTab('exchange')">Exchange</button>
+      </div>
+
+      <!-- ══════════════════════ OVERVIEW ══════════════════════════════════ -->
+      <div *if="self.currentTab == 'overview'" class="sc-panel">
+        <div class="sc-two-col">
+
+          <!-- Left: Fortune Counters -->
+          <div class="sc-col">
+            <span class="sc-section-hdr">Fortune Counters</span>
+            <div *for="local tier in (self.fortuneTiers or {})">
+              <span class="sc-row-label">{{tier.name}}: {{tier.fortune}} / {{tier.cap}}</span>
+              <div class="sc-bar-bg">
+                <div class="sc-bar-gold" *width="tier.fillPx"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sc-vdivider"></div>
+
+          <!-- Right: Exchange Progress -->
+          <div class="sc-col">
+            <span class="sc-section-hdr">Exchange Progress</span>
+            <div *for="local tier in (self.exchangeTiers or {})">
+              <span class="sc-row-label" *color="tier.ready and '#4caf50' or '#c0c0c0'">{{tier.name}}: {{tier.exchange}} / {{tier.cost}}{{tier.ready and '  [READY]' or ''}}</span>
+              <div class="sc-bar-bg">
+                <div class="sc-bar-green" *width="tier.fillPx"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Shard info row -->
+        <div class="sc-shard-box">
+          <span class="sc-gold-label">Arcane Shards: {{self.shards}}</span>
+        </div>
+      </div>
+
+      <!-- ══════════════════════ REFINE ═════════════════════════════════════ -->
+      <div *if="self.currentTab == 'refine'" class="sc-panel">
+        <div class="sc-two-col">
+
+          <!-- Left: Tier selector -->
+          <div class="sc-col-narrow">
+            <span class="sc-section-hdr">Chest Tier</span>
+            <button class="sc-sel-btn" *checked="self.selRefineTier == 1" onclick="self:setRefineTier(1)">Wooden</button>
+            <button class="sc-sel-btn" *checked="self.selRefineTier == 2" onclick="self:setRefineTier(2)">Silver</button>
+            <button class="sc-sel-btn" *checked="self.selRefineTier == 3" onclick="self:setRefineTier(3)">Golden</button>
+            <button class="sc-sel-btn" *checked="self.selRefineTier == 4" onclick="self:setRefineTier(4)">Obsidian</button>
+            <button class="sc-sel-btn" *checked="self.selRefineTier == 5" onclick="self:setRefineTier(5)">Crimson</button>
+            <button class="sc-sel-btn" *checked="self.selRefineTier == 6" onclick="self:setRefineTier(6)">Celestial</button>
+          </div>
+
+          <div class="sc-vdivider"></div>
+
+          <!-- Right: Quality + cost + action -->
+          <div class="sc-col-wide">
+            <span class="sc-section-hdr">Target Quality</span>
+            <div class="sc-btn-row">
+              <button class="sc-qual-btn" *checked="self.selRefineQuality == 'exceptional'" onclick="self:setRefineQuality('exceptional')">Exceptional</button>
+              <button class="sc-qual-btn" *checked="self.selRefineQuality == 'flawless'"    onclick="self:setRefineQuality('flawless')">Flawless</button>
+              <button class="sc-qual-btn" *checked="self.selRefineQuality == 'radiant'"     onclick="self:setRefineQuality('radiant')">Radiant</button>
+            </div>
+            <div class="sc-hsep"></div>
+            <span class="sc-info-label">{{self.refineCostText}}</span>
+            <span class="sc-gold-label" style="margin-top: 8px">Your shards: {{self.shards}}</span>
+            <button class="sc-action-btn" onclick="self:doRefine()" style="margin-top: 14px">Refine Chest</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════ CRAFT &amp; FUSE ═══════════════════════════ -->
+      <div *if="self.currentTab == 'craft'" class="sc-panel">
+
+        <!-- Craft Keys -->
+        <span class="sc-section-hdr">Craft Keys  (Tiers 1–4)</span>
+        <div class="sc-btn-row" style="margin-bottom: 6px">
+          <button class="sc-key-btn" *checked="self.selCraftKey == 1" onclick="self:setCraftKey(1)">Iron</button>
+          <button class="sc-key-btn" *checked="self.selCraftKey == 2" onclick="self:setCraftKey(2)">Silver</button>
+          <button class="sc-key-btn" *checked="self.selCraftKey == 3" onclick="self:setCraftKey(3)">Golden</button>
+          <button class="sc-key-btn" *checked="self.selCraftKey == 4" onclick="self:setCraftKey(4)">Shadow</button>
+        </div>
+        <span class="sc-info-label">{{self.craftCostText}}</span>
+        <span class="sc-gold-label" style="margin-top: 4px">Your shards: {{self.shards}}</span>
+        <button class="sc-action-btn" onclick="self:doCraftKey()" style="margin-top: 10px">Craft Key</button>
+
+        <div class="sc-hsep" style="margin-top: 14px; margin-bottom: 14px"></div>
+
+        <!-- Fuse Chests -->
+        <span class="sc-section-hdr">Fuse Chests  (3× same tier + same quality + 120 shards → next tier)</span>
+        <div class="sc-btn-row" style="margin-bottom: 6px">
+          <button class="sc-key-btn" *checked="self.selFuseTier == 1" onclick="self:setFuse(1)">Wooden → Silver</button>
+          <button class="sc-key-btn" *checked="self.selFuseTier == 2" onclick="self:setFuse(2)">Silver → Golden</button>
+          <button class="sc-key-btn" *checked="self.selFuseTier == 3" onclick="self:setFuse(3)">Golden → Obsidian</button>
+        </div>
+        <span class="sc-info-label">{{self.fuseCostText}}</span>
+        <span class="sc-gold-label" style="margin-top: 4px">Your shards: {{self.shards}}</span>
+        <button class="sc-action-btn" onclick="self:doFuse()" style="margin-top: 10px">Fuse Chests</button>
+
+      </div>
+
+      <!-- ══════════════════════ EXCHANGE ═══════════════════════════════════ -->
+      <div *if="self.currentTab == 'exchange'" class="sc-panel">
+
+        <!-- Tier selector -->
+        <div class="sc-btn-row" style="margin-bottom: 8px">
+          <button class="sc-key-btn" *checked="self.selExchangeTier == 1" onclick="self:setExchangeTier(1)">Wooden</button>
+          <button class="sc-key-btn" *checked="self.selExchangeTier == 2" onclick="self:setExchangeTier(2)">Silver</button>
+          <button class="sc-key-btn" *checked="self.selExchangeTier == 3" onclick="self:setExchangeTier(3)">Golden</button>
+          <button class="sc-key-btn" *checked="self.selExchangeTier == 4" onclick="self:setExchangeTier(4)">Obsidian</button>
+        </div>
+
+        <!-- Progress block -->
+        <div *if="self.exData" class="sc-ex-box">
+          <span class="sc-row-label" *color="self.exData.ready and '#4caf50' or '#c0c0c0'">Progress: {{self.exData.exchange}} / {{self.exData.cost}} opens</span>
+          <div class="sc-bar-bg-wide" style="margin-top: 5px">
+            <div class="sc-bar-green" *width="self.exData.fillPxFull"></div>
+          </div>
+          <span class="sc-info-label" style="margin-top: 5px" *color="self.exData.ready and '#4caf50' or '#909090'">{{self.exData.ready and '[READY]  Enter an item number below and click Claim.' or 'Open ' .. self.exData.remaining .. ' more ' .. self.exData.name .. ' Chests to unlock exchange.'}}</span>
+        </div>
+
+        <div class="sc-hsep" style="margin-top: 8px; margin-bottom: 8px"></div>
+
+        <span class="sc-section-hdr">Rare Pool</span>
+        <span class="sc-info-label" style="margin-bottom: 8px">Type  /exchange list &lt;tier&gt;  in chat to see all rare items.</span>
+
+        <div class="sc-claim-row">
+          <span class="sc-info-label">Item #:</span>
+          <input id="exItemInput" type="text" style="width: 40px; height: 18px; margin-left: 5px; margin-right: 10px" placeholder="1" maxlength="3" />
+          <button class="sc-sm-btn" onclick="self:doExchangeClaim()">Claim Item</button>
+        </div>
+
+      </div>
+
+      <!-- ── Footer ──────────────────────────────────────────────────────── -->
+      <div class="sc-footer">
+        <div class="sc-balance-bg">
+          <span class="sc-gold-label">Arcane Shards: {{self.shards}}</span>
+        </div>
+        <button class="sc-close-btn" onclick="self:hide()">Close</button>
+      </div>
+
+    </window>
+  </div>
+</html>
