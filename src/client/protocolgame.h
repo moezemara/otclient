@@ -284,6 +284,7 @@ private:
     void parsePlayerInfo(const InputMessagePtr& msg) const;
     void parsePlayerStats(const InputMessagePtr& msg) const;
     void parsePlayerSkills(const InputMessagePtr& msg) const;
+    void parseAttackSpeedUpdate(const InputMessagePtr& msg) const;
     void parsePlayerState(const InputMessagePtr& msg) const;
     void parsePlayerCancelAttack(const InputMessagePtr& msg);
     void parsePlayerModes(const InputMessagePtr& msg);

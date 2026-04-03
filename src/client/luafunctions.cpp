@@ -964,6 +964,9 @@ void Client::registerLuaFunctions()
     g_lua.bindClassMemberFunction<LocalPlayer>("getOfflineTrainingTime", &LocalPlayer::getOfflineTrainingTime);
     g_lua.bindClassMemberFunction<LocalPlayer>("getStoreExpBoostTime", &LocalPlayer::getStoreExpBoostTime);
     g_lua.bindClassMemberFunction<LocalPlayer>("getRegenerationTime", &LocalPlayer::getRegenerationTime);
+    g_lua.bindClassMemberFunction<LocalPlayer>("getBaseAttackSpeed", &LocalPlayer::getBaseAttackSpeed);
+    g_lua.bindClassMemberFunction<LocalPlayer>("getWalkAttackBonus", &LocalPlayer::getWalkAttackBonus);
+    g_lua.bindClassMemberFunction<LocalPlayer>("getFinalAttackSpeed", &LocalPlayer::getFinalAttackSpeed);
     g_lua.bindClassMemberFunction<LocalPlayer>("getBaseMagicLevel", &LocalPlayer::getBaseMagicLevel);
     g_lua.bindClassMemberFunction<LocalPlayer>("getTotalCapacity", &LocalPlayer::getTotalCapacity);
     g_lua.bindClassMemberFunction<LocalPlayer>("getInventoryItem", &LocalPlayer::getInventoryItem);

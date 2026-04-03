@@ -369,6 +369,9 @@ void ProtocolGame::parseMessage(const InputMessagePtr& msg)
                 case Proto::GameServerPlayerSkills:
                     parsePlayerSkills(msg);
                     break;
+                case Proto::GameServerAttackSpeedUpdate:
+                    parseAttackSpeedUpdate(msg);
+                    break;
                 case Proto::GameServerPlayerState:
                     parsePlayerState(msg);
                     break;
@@ -2657,7 +2660,21 @@ void ProtocolGame::parsePlayerSkills(const InputMessagePtr& msg) const
         const double transcendence = msg->getDouble();
         const double amplification = msg->getDouble();
         m_localPlayer->setForgeBonuses(momentum, transcendence, amplification);
+
+        // Attack speed stats (canary custom)
+        const uint16_t baseAttackSpeed = msg->getU16();
+        const uint16_t walkAttackBonus = msg->getU16();
+        const uint16_t finalAttackSpeed = msg->getU16();
+        m_localPlayer->setAttackSpeed(baseAttackSpeed, walkAttackBonus, finalAttackSpeed);
     }
+}
+
+void ProtocolGame::parseAttackSpeedUpdate(const InputMessagePtr& msg) const
+{
+    const uint16_t walkBonus = msg->getU16();
+    const uint16_t finalSpeed = msg->getU16();
+    const uint16_t decayMs = msg->getU16();
+    m_localPlayer->setWalkAttackBonus(walkBonus, finalSpeed, decayMs);
 }
 
 void ProtocolGame::parsePlayerState(const InputMessagePtr& msg) const

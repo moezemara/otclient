@@ -36,7 +36,10 @@ local statsCache = {
     },
     momentum = 0,
     transcendence = 0,
-    amplification = 0
+    amplification = 0,
+    baseAttackSpeed = 0,
+    walkAttackBonus = 0,
+    finalAttackSpeed = 0
 }
 
 local function setupUIButtons()
@@ -92,7 +95,9 @@ function init()
         onDefenseInfoChange = onDefenseInfoChange,
         onCombatAbsorbValuesChange = onCombatAbsorbValuesChange,
         onForgeBonusesChange = onForgeBonusesChange,
-        onExperienceRateChange = onExperienceRateChange
+        onExperienceRateChange = onExperienceRateChange,
+        onAttackSpeedChange = onAttackSpeedChange,
+        onWalkAttackBonusChange = onWalkAttackBonusChange
     })
     connect(g_game, {
         onGameStart = online,
@@ -151,7 +156,9 @@ function terminate()
         onDefenseInfoChange = onDefenseInfoChange,
         onCombatAbsorbValuesChange = onCombatAbsorbValuesChange,
         onForgeBonusesChange = onForgeBonusesChange,
-        onExperienceRateChange = onExperienceRateChange
+        onExperienceRateChange = onExperienceRateChange,
+        onAttackSpeedChange = onAttackSpeedChange,
+        onWalkAttackBonusChange = onWalkAttackBonusChange
     })
     disconnect(g_game, {
         onGameStart = online,
@@ -181,8 +188,9 @@ local SKILL_GROUPS = {
         'momentum', 'transcendence', 'amplification'
     },
     individual = {
-        'level', 'stamina', 'offlineTraining', 'magiclevel', 'skillId0', 'skillId1', 
-        'skillId2', 'skillId3', 'skillId4', 'skillId5', 'skillId6'
+        'level', 'stamina', 'offlineTraining', 'magiclevel', 'skillId0', 'skillId1',
+        'skillId2', 'skillId3', 'skillId4', 'skillId5', 'skillId6',
+        'baseAttackSpeed', 'walkAttackBonus', 'finalAttackSpeed'
     },
     GameAdditionalSkills = {
         'skillId7', 'skillId8', 'skillId9', 'skillId10', 'skillId11', 'skillId12'
@@ -854,6 +862,7 @@ function refresh()
     onOfflineTrainingChange(player, player:getOfflineTrainingTime())
     onRegenerationChange(player, player:getRegenerationTime())
     onSpeedChange(player, player:getSpeed())
+    onAttackSpeedChange(player, player:getBaseAttackSpeed(), player:getWalkAttackBonus(), player:getFinalAttackSpeed())
 
     for i = Skill.Fist, Skill.Transcendence do
         onSkillChange(player, i, player:getSkillLevel(i), player:getSkillLevelPercent(i))
@@ -1243,6 +1252,41 @@ end
 
 function onBaseSpeedChange(localPlayer, baseSpeed)
     setSkillBase('speed', localPlayer:getSpeed(), baseSpeed)
+end
+
+local function msToAps(ms)
+    if not ms or ms <= 0 then return "0.00" end
+    return string.format("%.2f", 1000 / ms)
+end
+
+function onAttackSpeedChange(localPlayer, base, walkBonus, final)
+    setSkillValue('baseAttackSpeed', msToAps(base) .. '/s')
+    local bonusAps = (base and final and base > 0 and final > 0) and (1000 / final - 1000 / base) or 0
+    setSkillValue('walkAttackBonus', bonusAps > 0.001 and (string.format('+%.2f', bonusAps) .. '/s') or '0.00/s')
+    setSkillValue('finalAttackSpeed', msToAps(final) .. '/s')
+end
+
+local walkBonusDecayEvent = nil
+
+function onWalkAttackBonusChange(localPlayer, walkBonus, final, decayMs)
+    if walkBonusDecayEvent then
+        removeEvent(walkBonusDecayEvent)
+        walkBonusDecayEvent = nil
+    end
+
+    local base = localPlayer:getBaseAttackSpeed()
+    local bonusAps = (base and final and base > 0 and final > 0) and (1000 / final - 1000 / base) or 0
+    setSkillValue('walkAttackBonus', bonusAps > 0.001 and (string.format('+%.2f', bonusAps) .. '/s') or '0.00/s')
+    setSkillValue('finalAttackSpeed', msToAps(final) .. '/s')
+
+    if walkBonus > 0 and decayMs and decayMs > 0 then
+        walkBonusDecayEvent = scheduleEvent(function()
+            walkBonusDecayEvent = nil
+            local base2 = localPlayer:getBaseAttackSpeed()
+            setSkillValue('walkAttackBonus', '0.00/s')
+            setSkillValue('finalAttackSpeed', msToAps(base2) .. '/s')
+        end, decayMs)
+    end
 end
 
 function onMagicLevelChange(localPlayer, magiclevel, percent)

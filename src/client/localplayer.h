@@ -68,6 +68,8 @@ public:
     void setDefenseInfo(uint16_t defense, uint16_t armor, double mitigation, double dodge, uint16_t damageReflection);
     void setCombatAbsorbValues(const std::map<uint8_t, double>& absorbValues);
     void setForgeBonuses(double momentum, double transcendence, double amplification);
+    void setAttackSpeed(uint16_t base, uint16_t walkBonus, uint16_t final);
+    void setWalkAttackBonus(uint16_t walkBonus, uint16_t final, uint16_t decayMs = 1000);
     void setExperienceRate(Otc::ExperienceRate_t type, uint16_t value);
     void setStoreExpBoostTime(uint16_t value);
     void setHarmony(uint8_t harmony);
@@ -92,6 +94,9 @@ public:
     uint16_t getRegenerationTime() { return m_regenerationTime; }
     uint16_t getOfflineTrainingTime() { return m_offlineTrainingTime; }
     uint16_t getStoreExpBoostTime() { return m_storeExpBoostTime; }
+    uint16_t getBaseAttackSpeed() { return m_baseAttackSpeed; }
+    uint16_t getWalkAttackBonus() { return m_walkAttackBonus; }
+    uint16_t getFinalAttackSpeed() { return m_finalAttackSpeed; }
 
     auto getStates() { return m_states; }
     uint32_t getMana() { return m_mana; }
@@ -220,6 +225,9 @@ private:
     uint16_t m_regenerationTime{ 0 };
     uint16_t m_offlineTrainingTime{ 0 };
     uint16_t m_storeExpBoostTime{ 0 };
+    uint16_t m_baseAttackSpeed{ 0 };
+    uint16_t m_walkAttackBonus{ 0 };
+    uint16_t m_finalAttackSpeed{ 0 };
 
     uint8_t m_attackElement{ 0 };
     uint8_t m_convertedElement{ 0 };

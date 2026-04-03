@@ -734,3 +734,18 @@ void LocalPlayer::setSerene(const bool serene)
 
     callLuaField("onSereneChange", serene, oldSerene);
 }
+
+void LocalPlayer::setAttackSpeed(uint16_t base, uint16_t walkBonus, uint16_t final)
+{
+    m_baseAttackSpeed = base;
+    m_walkAttackBonus = walkBonus;
+    m_finalAttackSpeed = final;
+    callLuaField("onAttackSpeedChange", base, walkBonus, final);
+}
+
+void LocalPlayer::setWalkAttackBonus(uint16_t walkBonus, uint16_t final, uint16_t decayMs)
+{
+    m_walkAttackBonus = walkBonus;
+    m_finalAttackSpeed = final;
+    callLuaField("onWalkAttackBonusChange", walkBonus, final, decayMs);
+}

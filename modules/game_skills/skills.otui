@@ -182,6 +182,27 @@ MiniWindow
       SkillValueLabel
 
     SkillButton
+      id: baseAttackSpeed
+      height: 15
+      SkillNameLabel
+        !text: tr('Base Atk Speed')
+      SkillValueLabel
+
+    SkillButton
+      id: walkAttackBonus
+      height: 15
+      SkillNameLabel
+        !text: tr('Walk Bonus')
+      SkillValueLabel
+
+    SkillButton
+      id: finalAttackSpeed
+      height: 15
+      SkillNameLabel
+        !text: tr('Atk Speed')
+      SkillValueLabel
+
+    SkillButton
       id: regenerationTime
       height: 15
       SkillNameLabel

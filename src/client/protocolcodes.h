@@ -172,6 +172,7 @@ namespace Proto
         GameServerBestiaryRefreshTracker = 185,
         GameServerTaskHuntingBasicData = 186,
         GameServerTaskHuntingData = 187,
+        GameServerAttackSpeedUpdate = 188, // 0xBC - canary custom
         GameServerBosstiaryCooldownTimer = 189,
         GameServerFloorChangeUp = 190,
         GameServerFloorChangeDown = 191,
